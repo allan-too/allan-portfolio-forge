@@ -21,15 +21,32 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Create mailto URL with form data
+      const subject = encodeURIComponent(`Portfolio Contact: Message from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      const mailtoUrl = `mailto:kipchirchirtoo01@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Open default email client
+      window.location.href = mailtoUrl;
+      
       toast({
-        title: "Message sent successfully!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        title: "Email client opened!",
+        description: "Your default email client should open with the message pre-filled.",
       });
+      
       setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an issue opening your email client. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -65,10 +82,10 @@ const ContactSection = () => {
                   <div>
                     <p className="font-medium">Email</p>
                     <a 
-                      href="mailto:allan.too.dev@gmail.com" 
+                      href="mailto:kipchirchirtoo01@gmail.com" 
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      allan.too.dev@gmail.com
+                      kipchirchirtoo01@gmail.com
                     </a>
                   </div>
                 </div>
@@ -80,10 +97,10 @@ const ContactSection = () => {
                   <div>
                     <p className="font-medium">Phone</p>
                     <a 
-                      href="tel:+254700000000" 
+                      href="tel:+254710944249" 
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      +254 700 000 000
+                      +254 710 944 249
                     </a>
                   </div>
                 </div>
@@ -121,7 +138,7 @@ const ContactSection = () => {
                   <Linkedin className="h-5 w-5 group-hover:text-primary-foreground" />
                 </a>
                 <a 
-                  href="mailto:allan.too.dev@gmail.com"
+                  href="mailto:kipchirchirtoo01@gmail.com"
                   className="flex items-center justify-center w-12 h-12 rounded-full bg-secondary hover:bg-primary transition-colors group"
                 >
                   <Mail className="h-5 w-5 group-hover:text-primary-foreground" />
@@ -192,7 +209,7 @@ const ContactSection = () => {
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? "Opening Email..." : "Send Message"}
               </Button>
             </form>
           </Card>
