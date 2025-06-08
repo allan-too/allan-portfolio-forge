@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code, Database, Globe, Server, Smartphone, Tools } from "lucide-react";
+import { Code, Database, Globe, Server, Smartphone, Wrench } from "lucide-react";
 
 const AboutSection = () => {
   const skills = {
@@ -22,7 +22,7 @@ const AboutSection = () => {
       technologies: ["React Native", "Flutter", "Expo", "Ionic"]
     },
     "DevOps": {
-      icon: Tools,
+      icon: Wrench,
       technologies: ["Docker", "AWS", "CI/CD", "Kubernetes", "Vercel"]
     },
     "Languages": {
